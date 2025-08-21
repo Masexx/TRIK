@@ -1,4 +1,21 @@
+﻿# Node
 node_modules/
-.env
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/dist/
+/build/
+/coverage/
+.temp/
+/.cache/
+
+# Env
+.env
+.env.*
+
+# OS / Editor trash
 .DS_Store
+Thumbs.db
+.vscode/
+.idea/
