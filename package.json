@@ -1,0 +1,16 @@
+{
+  "name": "trik-server",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch ./src/server.js",
+    "dev:8899": "cmd /c \"set PORT=8899&& node --watch ./src/server.js\"",
+    "kill:8888": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$p=8888; Get-NetTCPConnection -LocalPort $p -State Listen | % { Stop-Process -Id $_.OwningProcess -Force }\""
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>TRIK — старт</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html,body{
+      margin:0; padding:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    }
+    .wrap{ max-width:900px; margin:40px auto; padding:0 16px; }
+    h1{ font-size:28px; margin:0 0 12px }
+    button{ padding:10px 16px; font-size:14px; cursor:pointer; }
+    pre{ background:#f6f6f6; padding:12px; border-radius:8px; overflow:auto; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>TRIK — минимальный старт</h1>
+    <p>Эта страница отдается с сервера Express. Нажмите кнопку, чтобы проверить, что сервер отвечает.</p>
+
+    <p>
+      <button id="btnHealth">Проверить сервер</button>
+      <button id="btnDiscover">Сканирование (заглушка)</button>
+    </p>
+
+    <pre id="out">Нажмите кнопку…</pre>
+  </div>
+
+  <script>
+    const out = document.getElementById('out');
+
+    async function call(path, opts){
+      try{
+        const r = await fetch(path, opts);
+        const t = await r.text();
+        try{ return JSON.parse(t); }catch{ return { raw: t }; }
+      }catch(e){ return { error: String(e) }; }
+    }
+
+    document.getElementById('btnHealth').onclick = async () => {
+      out.textContent = 'Загрузка…';
+      const data = await call('/health');
+      out.textContent = JSON.stringify(data, null, 2);
+    };
+
+    document.getElementById('btnDiscover').onclick = async () => {
+      out.textContent = 'Сканирование (пока заглушка)…';
+      const data = await call('/api/discover');
+      out.textContent = JSON.stringify(data, null, 2);
+    };
+  </script>
+</body>
+</html>
